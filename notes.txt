@@ -23,7 +23,7 @@
 
 8. install ansible on ansible-machine
     sudo yum update -y
-    sudo amazon-linux-extras install ansible2 -y
+    sudo yum install ansible -y
 
 9. create inventory file
 
