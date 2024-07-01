@@ -21,34 +21,34 @@
       shell: cd /var/www/html
 
     - name: download web files from github
-      get_url:
-        url: 
-        dest: 
+      get_url: 
+        url: https://github.com/azeezsalu/jupiter/archive/refs/heads/main.zip
+        dest: /var/www/html/  
 
     - name: unzip the zip folder
       ansible.builtin.unarchive:
-        src: 
-        dest: 
-        remote_src: 
+        src: /var/www/html/jupiter-main.zip
+        dest: /var/www/html 
+        remote_src: true
 
     - name: copy webfiles from the jupiter-main directory to the html directory
       copy: 
-        src: 
-        dest: 
-        remote_src: 
+        src: /var/www/html/jupiter-main/
+        dest: /var/www/html
+        remote_src: true
 
     - name: remove the jupiter-main directory
       file: 
-        path: 
-        state: 
+        path: /var/www/html/jupiter-main
+        state: absent
 
     - name: remove the jupiter-main.zip folder
       file: 
-        path: 
-        state: 
+        path: /var/www/html/jupiter-main.zip
+        state: absent
 
     - name: start apache server, if not started
       ansible.builtin.service:
-        enabled: 
-        name: 
-        state: 
+        enabled: true
+        name: httpd
+        state: started
