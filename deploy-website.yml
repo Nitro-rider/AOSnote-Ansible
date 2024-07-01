@@ -8,17 +8,17 @@
   tasks:
     - name: update ec2 instance
       yum:
-        name: 
-        state: 
-        update_cache: 
+        name: "*"
+        state: latest
+        update_cache: true
 
     - name: install apache server
       yum:
-        name: 
-        state: 
+        name: httpd
+        state: latest
 
     - name: change directory to the html directory
-      shell: 
+      shell: cd /var/www/html
 
     - name: download web files from github
       get_url:
