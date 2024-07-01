@@ -1,8 +1,8 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
+    aws         = {
+      source    = "hashicorp/aws"
+      version   = "~> 5.0"
     }
   }
 }
@@ -13,18 +13,18 @@ provider "aws" {
 }
 
 resource "aws_vpc" "ansible_vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  cidr_block        = "10.0.0.0/16"
+  instance_tenancy  = "default"
 
-  tags = {
-    Name = "ansible vpc"
+  tags              = {
+    Name            = "ansible vpc"
   }
 }
 
 resource "aws_security_group" "ansible-machine-sg" {
-  name        = "ansible sg"
-  description = "Allow SSH traffic"
-  vpc_id      = aws_vpc.ansible_vpc.id
+  name          = "ansible sg"
+  description   = "Allow SSH traffic"
+  vpc_id        = aws_vpc.ansible_vpc.id
   ingress {
     description = "allow ssh"
     from_port   = 22
@@ -34,23 +34,23 @@ resource "aws_security_group" "ansible-machine-sg" {
 
   }
 
-  tags = {
-    Name = "ansible sg"
+  tags          = {
+    Name        = "ansible sg"
   }
 }
 
 resource "aws_security_group" "server_sg" {
-  name        = "server sg"
-  description = "Allow TLS inbound traffic and all outbound traffic"
-  vpc_id      = aws_vpc.ansible-vpc.id
+  name          = "server sg"
+  description   = "Allow TLS inbound traffic and all outbound traffic"
+  vpc_id        = aws_vpc.ansible-vpc.id
   ingress {
     description = "allow http traffic"
-    from_port = 80
-    to_port = 80
-    
+    from_port   = 80
+    to_port     = 80
+
   }
-  tags = {
-    Name = "server sg"
+  tags          = {
+    Name        = "server sg"
   }
 }
 
